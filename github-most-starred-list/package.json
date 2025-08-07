@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test && npx cypress run",
+    "test:unit": "ng test",
+    "test:e2e": "npx cypress run",
+    "test:e2e:open": "npx cypress open"
   },
   "private": true,
   "dependencies": {

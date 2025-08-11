@@ -1,0 +1,23 @@
+:host {
+  display: contents;
+}
+
+.repo-list-item__profile-picture {
+  @apply size-20 rounded-box;
+}
+.repo-list-item__title {
+  @apply text-lg font-semibold;
+}
+.repo-list-item__description {
+  @apply text-xs uppercase opacity-60;
+}
+.repo-list-item__second-line-wrapper {
+  @apply mt-3 pr-3 flex items-center space-x-3;
+}
+.badge--stars {
+  @apply badge badge-warning;
+}
+
+.badge--issues {
+  @apply badge badge-outline badge-error;
+}

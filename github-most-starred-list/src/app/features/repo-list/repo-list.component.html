@@ -1,0 +1,14 @@
+<section class="github-section">
+  <ul class="github-section__repo-list">
+    <li class="github-section__repo-list-title">
+      Most starred github repositories of the last 30 days.
+    </li>
+    <li *ngIf="isLoading" class="mt-12 ml-[420px] loading loading-infinity loading-xl"></li>
+
+    <li *ngIf="!isLoading && error" class="p-4 text-error">{{ error }}</li>
+
+    <li *ngFor="let repo of repos" class="list-row">
+      <app-repo-list-item [repo]="repo"></app-repo-list-item>
+    </li>
+  </ul>
+</section>

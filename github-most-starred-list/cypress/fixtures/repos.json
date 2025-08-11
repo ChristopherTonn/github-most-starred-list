@@ -1,0 +1,16 @@
+{
+  "total_count": 1,
+  "incomplete_results": false,
+  "items": [
+    {
+      "id": 1,
+      "name": "Titel",
+      "full_name": "user/titel",
+      "html_url": "https://github.com/user/titel",
+      "description": "Description",
+      "stargazers_count": 99,
+      "open_issues_count": 3,
+      "owner": { "login": "user", "avatar_url": "https://example.com/avatar.png" }
+    }
+  ]
+}

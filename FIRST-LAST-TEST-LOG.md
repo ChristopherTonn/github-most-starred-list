@@ -265,8 +265,8 @@ Missing baseUrl in compilerOptions. tsconfig-paths will be skipped
 
 ### Test Summary
 
-- ✅ **Unit Tests**: 14 of 14 tests passed successfully
-- ✅ **E2E Tests**: 7 of 7 tests passed successfully
+- ✅ **Unit Tests**: 15 of 15 tests passed successfully
+- ✅ **E2E Tests**: 8 of 8 tests passed successfully
 - ⏱️ **Execution Time**: Unit: 0.057 secs, E2E: 2 secs
 - 🌐 **Browser**: Chrome 139.0.0.0 on Mac OS 10.15.7, Cypress: Electron 130
 - 📊 **Success Rate**: 100%

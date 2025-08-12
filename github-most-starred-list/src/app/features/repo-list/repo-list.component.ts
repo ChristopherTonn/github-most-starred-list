@@ -1,40 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RepoListItemComponent } from './repo-list-item/repo-list-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { GithubService } from '../../core/services/github.service';
 import { Repo } from '../../core/models/repo.model';
+import { RepoListItemComponent } from './repo-list-item/repo-list-item.component';
 
 @Component({
   selector: 'app-repo-list',
-  imports: [CommonModule, RepoListItemComponent],
+  standalone: true,
+  imports: [CommonModule, RepoListItemComponent, InfiniteScrollModule],
   templateUrl: './repo-list.component.html',
-  styleUrl: './repo-list.component.css',
+  styleUrls: ['./repo-list.component.css'],
 })
-export class RepoListComponent {
-  items = Array.from({ length: 30 }, (_, i) => `Item ${i + 1}`);
-
+export class RepoListComponent implements OnInit {
   repos: Repo[] = [];
   isLoading = false;
-  error?: string;
+  isLoadingMore = false;
+  error = '';
+  page = 1;
+  hasMoreData = true;
+
+  readonly itemsPerPage = 50;
 
   constructor(private githubService: GithubService) {}
+
   ngOnInit(): void {
-    this.loadPage(1);
+    this.loadRepos(true);
   }
 
-  loadPage(page: number): void {
-    this.isLoading = true;
-    this.githubService.getMostStarredRepos(page).subscribe({
-      next: (res) => {
-        this.repos = res;
-        console.log('Repos loaded:', this.repos);
-        this.isLoading = false;
+  loadRepos(isInitialLoad = false): void {
+    if ((isInitialLoad ? this.isLoading : this.isLoadingMore) || !this.hasMoreData) return;
+
+    if (isInitialLoad) {
+      this.isLoading = true;
+    } else {
+      this.isLoadingMore = true;
+    }
+
+    this.githubService.getMostStarredRepos(this.page, this.itemsPerPage).subscribe({
+      next: (data) => {
+        if (data.length === 0) {
+          this.hasMoreData = false;
+        } else {
+          this.repos = [...this.repos, ...data];
+          this.page++;
+        }
+
+        if (isInitialLoad) {
+          this.isLoading = false;
+        } else {
+          this.isLoadingMore = false;
+        }
       },
       error: (err) => {
-        this.error = 'Failed to load repositories.';
-        console.error(err);
+        this.error = 'Failed to load repositories';
         this.isLoading = false;
+        this.isLoadingMore = false;
+        console.error(err);
       },
     });
+  }
+
+  onScroll(): void {
+    this.loadRepos(false);
   }
 }

@@ -15,4 +15,21 @@ describe('Repo List', () => {
       1
     );
   });
+  describe('Infinite Scroll', () => {
+    it('should load more repositories when scrolling down', () => {
+      cy.visit('/repos');
+
+      cy.get('li.list-row', { timeout: 10000 }).should('be.visible');
+
+      cy.get('li.list-row').then(($initialItems) => {
+        const initialCount = $initialItems.length;
+
+        cy.get('.github-section__repo-list').scrollTo('bottom');
+
+        cy.wait(2000);
+
+        cy.get('li.list-row').should('have.length.gt', initialCount);
+      });
+    });
+  });
 });

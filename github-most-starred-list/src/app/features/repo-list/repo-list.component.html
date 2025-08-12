@@ -1,14 +1,24 @@
 <section class="github-section">
-  <ul class="github-section__repo-list">
+  <ul
+    class="github-section__repo-list"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="300"
+    [scrollWindow]="false"
+    (scrolled)="onScroll()"
+  >
     <li class="github-section__repo-list-title">
       Most starred github repositories of the last 30 days.
     </li>
-    <li *ngIf="isLoading" class="mt-12 ml-[420px] loading loading-infinity loading-xl"></li>
+    <li *ngIf="isLoading" class="mt-12 ml-[420px] github-section__repo-list-loading-spinner"></li>
 
-    <li *ngIf="!isLoading && error" class="p-4 text-error">{{ error }}</li>
+    <li *ngIf="!isLoading && error" class="github-section__repo-list-error-message">{{ error }}</li>
 
     <li *ngFor="let repo of repos" class="list-row">
       <app-repo-list-item [repo]="repo"></app-repo-list-item>
+    </li>
+    <li *ngIf="isLoadingMore" class="github-section__repo-list-loading-spinner-wrapper">
+      <div class="github-section__repo-list-loading-spinner"></div>
     </li>
   </ul>
 </section>

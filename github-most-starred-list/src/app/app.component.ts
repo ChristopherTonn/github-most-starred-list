@@ -14,9 +14,6 @@ export class AppComponent {
   title = 'github-most-starred-list';
 
   constructor(private githubService: GithubService) {
-    console.log('Date from now 30 days ago:', getDateFromNowThirtyDaysAgo());
-    this.githubService.getMostStarredRepos().subscribe((data) => {
-      console.log('DATA: ', data);
-    });
+    this.githubService.getMostStarredRepos().subscribe((data) => {});
   }
 }

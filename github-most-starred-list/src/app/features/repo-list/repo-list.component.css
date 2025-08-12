@@ -33,4 +33,20 @@
       bg-base-100 
       z-10;
   }
+  .github-section__repo-list-error-message {
+    @apply p-4 text-error;
+  }
+
+  .github-section__repo-list-loading-spinner {
+    @apply loading  
+      loading-infinity 
+      loading-md;
+  }
+  .github-section__repo-list-loading-spinner-wrapper {
+    @apply mt-4 
+      flex 
+      justify-center
+      items-center
+      w-full;
+  }
 }

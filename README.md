@@ -18,6 +18,12 @@ Built with **Angular 19**, **Tailwind CSS**, and **DaisyUI** – this project de
 
 ---
 
+## 📸 App Screenshot
+
+![App Screenshot](./github-most-starred-list/src/assets/app-screenshot.png)
+
+---
+
 ## 🥪 Tech Stack
 
 | Area           | Technology                             |
@@ -29,6 +35,7 @@ Built with **Angular 19**, **Tailwind CSS**, and **DaisyUI** – this project de
 | **API**        | GitHub Search API                      |
 | **Build**      | Angular CLI                            |
 | **TypeScript** | 5.6 (Strict Mode)                      |
+| **Pagination** | ngx-infinite-scroll                    |
 
 ---
 
@@ -121,7 +128,6 @@ https://api.github.com/search/repositories?q=created:>YYYY-MM-DD&sort=stars&orde
 - Dynamic date calculation (last 30 days)
 - Pagination support
 - Error handling and loading states
-- Rate limit awareness
 
 ---
 
@@ -149,13 +155,7 @@ This project follows clean commit practices:
 
 - ✅ List most starred repos (last 30 days)
 - ✅ Repository details display
-- ✅ Pagination with scrolling
-
-**Extra Features:**
-
-- ✅ Repository name click → modal
-- ✅ 5-star rating system
-- ✅ Rating persistence and display
+- ✅ Pagination with infinte scrolling
 
 ## 🙏 Acknowledgments
 

@@ -65,4 +65,23 @@ describe('RepoListComponent', () => {
     expect(githubService.getMostStarredRepos).toHaveBeenCalled();
     expect(component.repos).toEqual(mockRepos);
   }));
+
+  it('should load more repos when scrolling', fakeAsync(() => {
+    (githubService.getMostStarredRepos as jasmine.Spy).calls.reset();
+
+    component.repos = [...mockRepos];
+    component.page = 1;
+    component.isLoading = false;
+
+    (githubService.getMostStarredRepos as jasmine.Spy).and.returnValue(of([...mockRepos]));
+
+    component.onScroll();
+    tick();
+
+    expect(githubService.getMostStarredRepos).toHaveBeenCalledWith(1, component.itemsPerPage);
+
+    expect(component.page).toBe(2);
+
+    expect(component.repos.length).toBe(2);
+  }));
 });

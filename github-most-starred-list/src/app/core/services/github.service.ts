@@ -12,14 +12,15 @@ export class GithubService {
 
   constructor(private http: HttpClient) {}
 
-  getMostStarredRepos(page: number = 1): Observable<Repo[]> {
-    const date = getDateFromNowThirtyDaysAgo();
-
-    const params = new HttpParams()
-      .set('q', `created:>${date}`)
-      .set('sort', 'stars')
-      .set('order', 'desc')
-      .set('page', page.toString());
+  getMostStarredRepos(page = 1, perPage = 50): Observable<Repo[]> {
+    const thirtyDaysAgo = getDateFromNowThirtyDaysAgo();
+    const params = {
+      q: `created:>${thirtyDaysAgo}`,
+      sort: 'stars',
+      order: 'desc',
+      page: page.toString(),
+      per_page: perPage.toString(),
+    };
 
     return this.http
       .get<{ items: Repo[] }>(this.apiUrl, { params })
